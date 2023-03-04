@@ -8,7 +8,7 @@ function AddFloor() {
 
   const addFl = async () => {
     const docRef = await addDoc(
-      collection(db, `Properties/${propertyId}/floors`),
+      collection(db, `Properties/${propertyId}/Floors`),
       { Name: "Floor1" }
     );
     console.log(docRef.id);

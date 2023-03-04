@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -24,3 +24,27 @@ export const auth = getAuth(app);
 
 // Firebase storage reference
 export const storage = getStorage(app);
+
+//Get All Properties
+export const getProperties = async (setProperties) => {
+  const docRef = await getDocs(collection(db, "Properties"));
+  docRef.forEach((doc) => {
+    console.log(doc.id);
+    setProperties((prev) => {
+      return [...prev, doc.id];
+    });
+  });
+};
+
+//Get All Properties
+export const getFloors = async (propertyId, setFloors) => {
+  const docRef = await getDocs(
+    collection(db, `Properties/${propertyId}/Floors`)
+  );
+  docRef.forEach((doc) => {
+    console.log(doc.id);
+    setFloors((prev) => {
+      return [...prev, doc.id];
+    });
+  });
+};
