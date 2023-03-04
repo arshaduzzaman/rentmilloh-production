@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import Dashboard from "./pages/Dashboard";
+import AddFloor from "./pages/floor/AddFloor";
+import AddProperty from "./pages/property/AddProperty";
+import FloorDetails from "./pages/floor/FloorDetails";
+import ViewFloors from "./pages/floor/ViewFloors";
+import ViewProperties from "./pages/property/ViewProperties";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      {/* Home */}
+      <Route exact path="/" element={<Dashboard />} />
+
+      {/* Property */}
+      <Route exact path="/properties/" element={<ViewProperties />} />
+      <Route exact path="/properties/add" element={<AddProperty />} />
+      <Route exact path="/properties/:propertyId" element={<AddProperty />} />
+
+      {/* Floor */}
+      <Route
+        exact
+        path="/properties/:propertyId/floors/"
+        element={<ViewFloors />}
+      />
+      <Route
+        exact
+        path="/properties/:propertyId/floors/add"
+        element={<AddFloor />}
+      />
+      <Route
+        exact
+        path="/properties/:propertyId/floors/:floorId"
+        element={<FloorDetails />}
+      />
+    </Routes>
   );
 }
 
